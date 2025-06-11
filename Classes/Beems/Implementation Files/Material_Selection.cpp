@@ -10,8 +10,8 @@ void beam::Mat_Sel()
     Material_Initial_Set();
     do
     {
-        cout << " # | Material Name             | Yield Strength [MPa] | Density [Kg/m^3] ";
-        cout << "\n------------------------------------------------------------------------\n";
+        cout << " # | Material Name             | Yield Strength | Density ";
+        cout << "\n----------------------------------------------------------\n";
         for (int i = 0; i < name_mat.size(); i++)
         {
             if (sp_mat[i][0] != 0)
@@ -29,24 +29,24 @@ void beam::Mat_Sel()
                 }
                 
                 cout << " | " << sp_mat[i][0];
-                for (int j = 0; j < (27 - to_string(sp_mat[i][0]).length()); j++)
-                {
-                    cout << " ";
-                }
+                if (sp_mat[i][0] < 10) cout << "             ";
+                else if (sp_mat[i][0] < 100) cout << "            ";
+                else if (sp_mat[i][0] < 1000) cout << "           ";
+                else if (sp_mat[i][0] < 10000) cout << "          ";
 
                 cout << " | " << sp_mat[i][1] <<"\n";
                 last_added_mat = i;
             }
         }
 
-        cout << "\nChoose the beem's material (if you want to add a material press 0): ";
+        cout << "\nChoose the beam's material (if you want to add a material press 0): ";
         cin >> chooser;
 
         if (chooser == ADD_NEW_MATERIAL)
         {
             // to add new materials as the user wants
             material_add();
-            cout << "\nChoose the beem's material: ";
+            cout << "\nChoose the beam's material: ";
             cin >> chooser;
         }
 
